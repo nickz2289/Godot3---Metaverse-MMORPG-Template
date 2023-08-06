@@ -1,0 +1,84 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://new_gradienttexture.tres" type="Texture" id=2]
+[ext_resource path="res://Character.gd" type="Script" id=3]
+[ext_resource path="res://bubblechar.gd" type="Script" id=4]
+[ext_resource path="res://Roboto (1)/Roboto-Regular.ttf" type="DynamicFontData" id=5]
+
+[sub_resource type="SpatialMaterial" id=10]
+albedo_texture = ExtResource( 2 )
+
+[sub_resource type="BoxShape" id=6]
+
+[sub_resource type="DynamicFont" id=12]
+size = 21
+font_data = ExtResource( 5 )
+
+[sub_resource type="ViewportTexture" id=11]
+viewport_path = NodePath("ChatBubble/Viewport")
+
+[sub_resource type="DynamicFont" id=14]
+size = 30
+font_data = ExtResource( 5 )
+
+[sub_resource type="ViewportTexture" id=13]
+viewport_path = NodePath("CharacterName/Viewport")
+
+[node name="Character" type="RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.48847, -5.76313 )
+mode = 2
+script = ExtResource( 3 )
+
+[node name="CSGBox" type="CSGBox" parent="."]
+use_collision = true
+material = SubResource( 10 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 6 )
+
+[node name="ChatBubble" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.50518, 5.05881 )
+script = ExtResource( 4 )
+
+[node name="Viewport" type="Viewport" parent="ChatBubble"]
+size = Vector2( 500, 90 )
+
+[node name="Label" type="Label" parent="ChatBubble/Viewport"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 500.0
+margin_bottom = 90.0
+custom_fonts/font = SubResource( 12 )
+text = "-"
+align = 1
+autowrap = true
+clip_text = true
+
+[node name="Sprite3D" type="Sprite3D" parent="ChatBubble"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.118287, 5.37079, -5.62999 )
+flip_v = true
+pixel_size = 0.0164
+billboard = 1
+texture = SubResource( 11 )
+
+[node name="CharacterName" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.378968, 0 )
+
+[node name="Viewport" type="Viewport" parent="CharacterName"]
+size = Vector2( 400, 100 )
+transparent_bg = true
+
+[node name="Label" type="Label" parent="CharacterName/Viewport"]
+margin_right = 400.0
+margin_bottom = 100.0
+custom_fonts/font = SubResource( 14 )
+text = "Nama Character"
+align = 1
+
+[node name="Sprite3D" type="Sprite3D" parent="CharacterName"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.766886, 0 )
+flip_v = true
+modulate = Color( 1, 0.32549, 0.0313726, 1 )
+pixel_size = 0.0104
+billboard = 1
+texture = SubResource( 13 )
